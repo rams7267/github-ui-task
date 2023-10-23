@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    padding: 10px 20px;
+    gap: 10px;
+
+    @media (max-width: 800px) {
+        display: block;
+    }
+
+    .noData {
+        margin-top: 30px;
+    }
+}

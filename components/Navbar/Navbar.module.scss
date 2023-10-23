@@ -1,0 +1,22 @@
+.navWrapper {
+  width: 100vw;
+  border-bottom: 0.5px solid grey;
+  padding: 10px 10px 0px;
+
+  overflow-x: scroll;
+
+  >div {
+    width: max-content;
+    display: flex;
+    gap: 10px;
+  }
+
+  .navItems {
+    padding: 10px;
+    cursor: pointer;
+
+    &.activeTab {
+      border-bottom: 2px solid orange;
+    }
+  }
+}
