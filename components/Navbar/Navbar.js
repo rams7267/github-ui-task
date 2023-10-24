@@ -1,12 +1,13 @@
 import React from "react";
-import { Navbar_Items } from "@/Utils/constants";
-import styles from "./Navbar.module.scss";
 import { useDispatch, useSelector } from "react-redux";
+
+import styles from "./Navbar.module.scss";
+import { Navbar_Items } from "@/Utils/constants";
 import { setActiveTab } from "@/Utils/Redux/user.slice";
 
 export const Navbar = () => {
+  
   const dispatch = useDispatch();
-
   const { activeTab } = useSelector((state) => state.user);
 
   return (

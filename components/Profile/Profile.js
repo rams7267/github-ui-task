@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 import styles from "./Profile.module.scss";
-import { useSelector } from "react-redux";
 
 const Profile = () => {
   const { userData } = useSelector((state) => state.user);
@@ -18,18 +18,18 @@ const Profile = () => {
           alt={userData?.avatar_url}
         />
         <div className={styles.nameLogin}>
-        <p className={styles.name}>{userData?.name || ""}</p>
-        <p className={styles.login}>{userData?.login || ""}</p>
+          {userData?.name && <p className={styles.name}>{userData?.name}</p>}
+          {userData?.login && <p className={styles.login}>{userData?.login}</p>}
         </div>
       </div>
       <div className={styles.detailsWrapper}>
-        <p className={styles.bio}>{userData?.bio || ""}</p>
+        {userData?.bio && <p className={styles.bio}>{userData?.bio}</p>}
         <p>
           <b>{userData?.followers || 0}</b> followers &#183;{" "}
           <b>{userData?.following || 0}</b> following
         </p>
-        <p>🏬 {userData?.company}</p>
-        <p>📍 {userData?.location}</p>
+        {userData?.company && <p>🏬 {userData?.company}</p>}
+        {userData?.location && <p>📍 {userData?.location}</p>}
       </div>
       <button className={styles.editButton}>Edit Profile</button>
     </div>

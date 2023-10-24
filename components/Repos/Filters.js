@@ -1,7 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import styles from "./Repos.module.scss";
 import { SortOrderElements, TypeFilter } from "@/Utils/constants";
-import { useDispatch, useSelector } from "react-redux";
 import {
   setLanguage,
   setSearchTerm,
@@ -11,6 +12,7 @@ import {
 import { debounce } from "@/Utils/helpers";
 
 const Filters = () => {
+  
   const dispatch = useDispatch();
   const { allLanguages, typeFilter, language, sort } = useSelector(
     (state) => state?.repo

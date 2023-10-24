@@ -11,10 +11,12 @@ const repoSlice = createSlice({
     allLanguages: ["ALL"],
     sort: SortOrderElements[0].field,
     showResult: false,
+    isLoading: true
   },
   reducers: {
     setAllRepoData: (state, action) => {
       state.allData = action.payload;
+      state.isLoading = false;
       state.allLanguages = [
         "ALL",
         ...new Set(

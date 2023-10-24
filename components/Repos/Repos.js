@@ -1,44 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { formatDate } from "@/Utils/helpers";
+
+import { filterWithSearchTerm, formatDate, getSorted } from "@/Utils/helpers";
 import styles from "./Repos.module.scss";
 import Filters from "./Filters";
 import ResultDetails from "./ResultDetails";
+import { ALL_LABLE, PRIVATE_LABLE, PUBLIC_LABLE, SOURCES_LABLE } from "@/Utils/constants";
 
 const Repos = () => {
-  const { allData, searchTerm, typeFilter, language, sort } = useSelector(
+  const { userData } = useSelector((state) => state.user);
+  const { allData, searchTerm, typeFilter, language, sort, isLoading } = useSelector(
     (state) => state?.repo
   );
-  const { userData } = useSelector((state) => state.user);
+
   const [userRepos, setUserRepos] = useState(allData);
 
   useEffect(() => {
-    let temp = allData
-      ?.filter((item) => {
-        return (
-          searchTerm?.length === 0 ||
-          item?.name?.toLowerCase().indexOf(searchTerm?.toLowerCase()) > -1 ||
-          item?.description?.toLowerCase().indexOf(searchTerm?.toLowerCase()) >
-            -1
-        );
-      })
-      ?.sort((a, b) => {
-        if (sort === "stargazers_count") return b[sort] - a[sort];
-        else if (sort === "name")
-          return b[sort]?.toLowerCase() < a[sort]?.toLowerCase();
-        else if (sort === "updated_at")
-          return new Date(b[sort]).getTime() - new Date(a[sort]).getTime();
-      });
+    //filtering repositories with search term and sorting by sort item
+    let temp = filterWithSearchTerm(allData, searchTerm);
 
-    if (language !== "ALL") {
+    temp = getSorted(temp, sort);
+
+    //filtering repositories with language
+    if (language !== ALL_LABLE) {
       temp = temp?.filter((item) => {
         return item?.language === language;
       });
     }
 
-    if (typeFilter !== "ALL") {
+    //filtering repositories with type
+    if (typeFilter !== ALL_LABLE) {
       temp = temp?.filter((item) => {
-        if (typeFilter === "sources") {
+        if (typeFilter === SOURCES_LABLE) {
           return !item?.fork;
         }
         return item?.[typeFilter];
@@ -51,7 +44,7 @@ const Repos = () => {
   return (
     <div className={styles.rightWrapper}>
       <Filters />
-      <div className={styles.resultWrapper}>
+      {isLoading ? <h1>Data Loading....</h1> : <div className={styles.resultWrapper}>
         <ResultDetails userRepos={userRepos} />
         {userRepos?.length > 0 ? (
           <>
@@ -66,10 +59,12 @@ const Repos = () => {
                       <a href={repo?.svn_url} target="_blank">
                         {repo?.name}
                       </a>
-                      <span>{repo?.private ? "Private" : "Public"}</span>
+                      <span>
+                        {repo?.private ? PRIVATE_LABLE : PUBLIC_LABLE}
+                      </span>
                     </div>
                     <div className={styles.description}>
-                      <p>{repo?.description || ""}</p>
+                      {repo?.description && <p>{repo?.description}</p>}
                       <div className={styles.starButton}>
                         <div>&#9734; Star</div> <span>&#x2304;</span>
                       </div>
@@ -106,7 +101,7 @@ const Repos = () => {
             {userData?.login || ""} doesn’t have any repositories that match.{" "}
           </h1>
         )}
-      </div>
+      </div>}
     </div>
   );
 };

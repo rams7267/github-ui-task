@@ -10,16 +10,19 @@ import styles from "./index.module.scss";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { activeTab } = useSelector((state) => state.user);
-  const { userData } = useSelector((state) => state.user);
+  const { activeTab, userData } = useSelector((state) => state.user);
 
   useEffect(() => {
     const fetchData = async () => {
-      const userData = await getUserProfile();
-      dispatch(setUserData(userData));
-      const userRepos = await getUserRepos();
-      dispatch(setAllRepoData(userRepos));
-
+      try {
+        const userData = await getUserProfile();
+        dispatch(setUserData(userData));
+        const userRepos = await getUserRepos();
+        dispatch(setAllRepoData(userRepos));
+      } catch (error) {
+        // Handle errors 
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
@@ -31,7 +34,10 @@ export default function Home() {
       <div className={styles.wrapper}>
         <Profile />
         {activeTab !== "Repositories" ? (
-          <div className={styles.noData}>{userData?.login || ""} doesn’t have any data related to {activeTab}. </div>
+          <div className={styles.noData}>
+            {userData?.login || ""} doesn’t have any data related to {activeTab}
+            .{" "}
+          </div>
         ) : (
           <Repos />
         )}
