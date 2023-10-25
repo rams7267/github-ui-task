@@ -10,9 +10,10 @@ import {
   setType,
 } from "@/Utils/Redux/repo.slice";
 import { debounce } from "@/Utils/helpers";
+import Select from "../Select/Select";
+import { REPO_IMAGE } from "@/Utils/images";
 
 const Filters = () => {
-  
   const dispatch = useDispatch();
   const { allLanguages, typeFilter, language, sort } = useSelector(
     (state) => state?.repo
@@ -27,52 +28,44 @@ const Filters = () => {
   };
 
   const handleLanguageChange = (e) => {
-    dispatch(setLanguage(e.target.value));
+    dispatch(setLanguage(e));
   };
 
   const handleTypeChange = (e) => {
-    dispatch(setType(e.target.value));
+    dispatch(setType(e));
   };
 
   return (
     <div className={styles.filters}>
-      <button className={styles.newButtonMweb}>NEW</button>
+      <button className={styles.newButtonMweb}>{REPO_IMAGE} {" "}New</button>
       <div>
         <input
           type="text"
-          placeholder="Find a repository"
+          placeholder="Find a repository..."
           onChange={handleTextChange}
         />
       </div>
       <div>
-        <select value={typeFilter} onChange={handleTypeChange}>
-          {TypeFilter?.map((option, index) => {
-            return (
-              <option key={`typeOptionSelect-${index}`} value={option.value}>
-                {option.lable}
-              </option>
-            );
-          })}
-        </select>
-        <select value={language} onChange={handleLanguageChange}>
-          {allLanguages?.map((option, index) => {
-            return (
-              <option key={`languageOptionSelect-${index}`} value={option}>
-                {option}
-              </option>
-            );
-          })}
-        </select>
-        <select value={sort} onChange={handleSortChange}>
-          {SortOrderElements?.map((option, index) => {
-            return (
-              <option key={`sortOptionSelect-${index}`} value={option.field}>
-                {option?.lable}
-              </option>
-            );
-          })}
-        </select>
-        <button className={styles.newButtonWeb}>NEW</button>
+        <Select
+          lable="Type"
+          data={TypeFilter}
+          value={typeFilter}
+          onSelect={handleTypeChange}
+        />
+        <Select
+          lable="Language"
+          data={allLanguages}
+          value={language}
+          onSelect={handleLanguageChange}
+        />
+        <Select
+          lable="Sort"
+          optionLable="Select order"
+          data={SortOrderElements}
+          value={sort}
+          onSelect={handleSortChange}
+        />
+        <button className={styles.newButtonWeb}>{REPO_IMAGE} {" "}New</button>
       </div>
     </div>
   );

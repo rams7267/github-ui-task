@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "./Repos.module.scss";
 import { getLables } from "@/Utils/helpers";
 import { clearFilter } from "@/Utils/Redux/repo.slice";
+import { CLOSE_IMAGE } from "@/Utils/images";
 
 const ResultDetails = ({ userRepos }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ const ResultDetails = ({ userRepos }) => {
             )}{" "}
             sorted by <b>{getLables(sort)}</b>
           </p>
-          <span onClick={handleClear}>&#x2715; Clear Filter</span>
+          <span onClick={handleClear}>{CLOSE_IMAGE} Clear Filter</span>
         </div>
       ) : (
         <></>

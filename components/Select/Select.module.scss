@@ -1,0 +1,85 @@
+.selectWrapper {
+  position: relative;
+  .lableWrapper {
+    padding: 5px 16px;
+    color: #24292f;
+    font-size: 14px;
+    background: #f6f8fa;
+    line-height: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: max-content;
+    outline: 1px solid #afb8c1;
+    border-radius: 6px;
+    height: 100%;
+
+    svg {
+      margin-bottom: -3px;
+    }
+  }
+
+  .overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba($color: grey, $alpha: 0.6);
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .optionsWrapper {
+    position: absolute;
+    color: #1f2328;
+    border: 1px solid #afb8c1;
+    width: 300px;
+    right: 0px;
+    background-color: #fff;
+    margin: 8px 0px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+
+    > div {
+      padding: 7px 16px;
+      display: flex;
+
+      span {
+        width: 24px;
+      }
+    }
+
+    div + div {
+      border-top: 1px solid #afb8c1;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #eaeef280;
+      }
+    }
+
+    .optionLable {
+      font-weight: 500;
+      span {
+        margin-left: auto;
+        cursor: pointer;
+      }
+    }
+
+    @media (max-width: 800px) {
+      position: relative;
+      z-index: 999;
+      max-height: 380px;
+      margin: auto;
+      width: calc(100% - 32px);
+      border-radius: 16px;
+      overflow-y: scroll;
+      font-size: 14px;
+
+      >div {
+        padding: 16px;
+      }
+    }
+  }
+}

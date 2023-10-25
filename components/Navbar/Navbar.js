@@ -6,7 +6,6 @@ import { Navbar_Items } from "@/Utils/constants";
 import { setActiveTab } from "@/Utils/Redux/user.slice";
 
 export const Navbar = () => {
-  
   const dispatch = useDispatch();
   const { activeTab } = useSelector((state) => state.user);
 
@@ -19,14 +18,18 @@ export const Navbar = () => {
               className={`${styles.navItems} ${
                 activeTab === nav_item.name ? styles.activeTab : ""
               }`}
-              key={`nav-item-${index}`}
-              onClick={() => {
-                dispatch(setActiveTab(nav_item.name));
-              }}
-              dangerouslySetInnerHTML={{
-                __html: nav_item.icon + " " + nav_item.name,
-              }}
-            ></div>
+            >
+              <div
+                className={styles.navContent}
+                key={`nav-item-${index}`}
+                onClick={() => {
+                  dispatch(setActiveTab(nav_item.name));
+                }}
+                dangerouslySetInnerHTML={{
+                  __html: nav_item.icon + " " + nav_item.name,
+                }}
+              ></div>
+            </div>
           );
         })}
       </div>

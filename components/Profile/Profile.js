@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 
 import styles from "./Profile.module.scss";
+import { COMPANY_IMAGE, FOLLOWER_IMAGE, LOCATION_IMG } from "@/Utils/images";
 
 const Profile = () => {
   const { userData } = useSelector((state) => state.user);
@@ -24,12 +25,20 @@ const Profile = () => {
       </div>
       <div className={styles.detailsWrapper}>
         {userData?.bio && <p className={styles.bio}>{userData?.bio}</p>}
-        <p>
-          <b>{userData?.followers || 0}</b> followers &#183;{" "}
+        <p className={styles.following}>
+          {FOLLOWER_IMAGE} <b>{userData?.followers || 0}</b> followers &#183;{" "}
           <b>{userData?.following || 0}</b> following
         </p>
-        {userData?.company && <p>🏬 {userData?.company}</p>}
-        {userData?.location && <p>📍 {userData?.location}</p>}
+        {userData?.company && (
+          <p className={styles.detailItems}>
+            {COMPANY_IMAGE} {userData?.company}
+          </p>
+        )}
+        {userData?.location && (
+          <p className={styles.detailItems}>
+            {LOCATION_IMG} {userData?.location}
+          </p>
+        )}
       </div>
       <button className={styles.editButton}>Edit Profile</button>
     </div>

@@ -49,6 +49,32 @@ export const getSorted = (data = [], sort) => {
   });
 };
 
+export const getLanguageColor = (language) => {
+  const colorMap = {
+    HTML: "#e34c26",
+    JavaScript: "#f1e05a",
+    CSS: "#563d7c",
+    // Add more language-color mappings as needed
+  };
+
+  const stringToHash = () => {
+    let hash = 0;
+
+    for (let i = 0; i < language.length; i++) {
+      hash = language.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    return hash;
+  };
+
+  const intToRGB = (i) => {
+    const c = (i & 0x00ffffff).toString(16).toUpperCase();
+    return "#" + "00000".substring(0, 6 - c.length) + c;
+  };
+
+  return colorMap[language] || intToRGB(stringToHash());
+};
+
 export const getLables = (lable) => {
   switch (lable) {
     case UPDATED_AT_LABLE:

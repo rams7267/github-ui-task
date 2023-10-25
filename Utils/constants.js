@@ -12,8 +12,8 @@ export const FORK_LABLE = "fork";
 export const ARCHIEVED_LABLE = "archived";
 export const MIRRORED_LABLE = "mirror_url";
 export const TEMPLATE_LABLE = "is_template";
-export const PRIVATE_LABLE = "Private"
-export const PUBLIC_LABLE = "Public"
+export const PRIVATE_LABLE = "Private";
+export const PUBLIC_LABLE = "Public";
 
 export const Navbar_Items = [
   { icon: "📖", name: OVERVIEW_LABLE },
@@ -24,9 +24,9 @@ export const Navbar_Items = [
 ];
 
 export const SortOrderElements = [
-  { lable: "Last Updated", field: UPDATED_AT_LABLE },
-  { lable: "Name", field: NAME_LABLE },
-  { lable: "Stars", field: STARS_LABLE },
+  { lable: "Last Updated", value: UPDATED_AT_LABLE },
+  { lable: "Name", value: NAME_LABLE },
+  { lable: "Stars", value: STARS_LABLE },
 ];
 
 export const TypeFilter = [

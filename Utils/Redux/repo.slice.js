@@ -8,16 +8,16 @@ const repoSlice = createSlice({
     searchTerm: "",
     typeFilter: "ALL",
     language: "ALL",
-    allLanguages: ["ALL"],
-    sort: SortOrderElements[0].field,
+    allLanguages: [],
+    sort: SortOrderElements[0].value,
     showResult: false,
-    isLoading: true
+    isLoading: true,
   },
   reducers: {
     setAllRepoData: (state, action) => {
       state.allData = action.payload;
       state.isLoading = false;
-      state.allLanguages = [
+      const temp = [
         "ALL",
         ...new Set(
           action.payload
@@ -25,6 +25,9 @@ const repoSlice = createSlice({
             ?.filter((item) => item?.length) || []
         ),
       ];
+      state.allLanguages = temp.map((item) => {
+        return { lable: item, value: item };
+      });
     },
     setLanguage: (state, action) => {
       state.language = action.payload;

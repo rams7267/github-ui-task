@@ -1,57 +1,76 @@
 .profileWrapper {
   min-width: calc(max(20vw, 250px));
+  border-bottom: 0.25px solid grey;
+  height: max-content;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
 
   .imageWrapper {
+    margin-top: 32px;
 
-    @media (max-width:800px) {
-        display: flex;
-        gap: 20px;
-      }
+    @media (max-width: 800px) {
+      display: flex;
+      gap: 20px;
+    }
 
     .profilePic {
       border-radius: 100%;
       width: 100%;
       height: auto;
-      margin: 20px 0px 10px;
 
-      @media (max-width:800px) {
-        width: 60px;
+      @media (max-width: 800px) {
+        width: 54px;
+        height: 54px;
+        margin: 16px 0px;
       }
     }
 
     .nameLogin {
-      color: #e6edf3;
-
-      @media (max-width:800px) {
-        margin: auto 0px 10px ;
+      padding: 16px 0px;
+      @media (max-width: 800px) {
+        margin: auto 0px 24px;
       }
 
       .name {
         font-size: 24px;
+        line-height: 1.25;
+        font-weight: 600;
       }
 
       .login {
-        color: #7d8590;
+        color: #656d76;
         font-size: 20px;
+        line-height: 24px;
+        font-style: normal;
+        font-weight: 300;
       }
     }
   }
 
   .detailsWrapper {
-    color: #e6edf3;
+    // color: #1f2328;
+    font-size: 14px;
 
     .bio {
       font-size: 16px;
-      padding: 10px 0px;
     }
 
-    p {
-      padding: 5px 0px;
+    .following {
+      color: #656d76;
+      margin: 16px 0px;
+
+      b {
+        color: #1f2328;
+      }
+    }
+
+    .detailItems {
+      padding-top: 4px;
     }
   }
 
   .editButton {
-    width: 90%;
+    width: 100%;
     padding: 5px 16px;
     font-size: 14px;
     font-weight: 500;
@@ -65,6 +84,8 @@
     border-radius: 6px;
     -webkit-appearance: none;
     appearance: none;
-    margin: 10px 5% auto;
+    margin-top: 16px;
+    border: 0.25px solid grey;
+    background-color: #f3f4f6;
   }
 }

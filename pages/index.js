@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.mainWrapper}>
       <Navbar />
       <div className={styles.wrapper}>
         <Profile />
