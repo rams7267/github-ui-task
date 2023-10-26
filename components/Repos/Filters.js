@@ -24,7 +24,7 @@ const Filters = () => {
   }, 1000);
 
   const handleSortChange = (e) => {
-    dispatch(setSort(e.target.value));
+    dispatch(setSort(e));
   };
 
   const handleLanguageChange = (e) => {
